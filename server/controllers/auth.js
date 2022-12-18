@@ -17,8 +17,7 @@ export const register = asyncHandler(async (req, res) => {
       occupation,
     } = req.body;
 
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(password, salt);
+    const passwordHash = await bcrypt.hash(password, 2);
 
     const newUser = new User({
       firstName,
@@ -35,9 +34,9 @@ export const register = asyncHandler(async (req, res) => {
 
     const savedUser = await newUser.save();
 
-    res.status(201).json({ success: true, savedUser });
+    res.status(201).json(savedUser);
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 

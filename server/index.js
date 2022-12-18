@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import colors from 'colors';
-import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import multer from 'multer';
@@ -16,9 +15,6 @@ import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
 import { createPost } from './controllers/posts.js';
 import { verifyToken } from './middleware/auth.js';
-import User from './models/User.js';
-import Post from './models/Post.js';
-import { users, posts } from './data/index.js';
 
 // Configurations
 const __filename = fileURLToPath(import.meta.url);
@@ -30,9 +26,9 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('dev'));
+app.use(cors());
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
-app.use(cors());
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 
 const port = process.env.PORT || 5000;
@@ -40,10 +36,10 @@ const port = process.env.PORT || 5000;
 // File Storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cd(null, 'public/assests');
+    cb(null, 'public/assests');
   },
   filename: (req, file, cb) => {
-    cd(null, file.originalname);
+    cb(null, file.originalname);
   },
 });
 const upload = multer({ storage });
@@ -60,6 +56,3 @@ app.use('/posts', postRoutes);
 connectDB();
 
 app.listen(port, () => console.log(`Server running on port ${port}`.bgGreen));
-
-// User.insertMany(users);
-// Post.insertMany(posts);

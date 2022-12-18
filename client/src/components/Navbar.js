@@ -41,7 +41,11 @@ const Navbar = () => {
   const background = theme.palette.background.default;
   const alt = theme.palette.background.alt;
 
-  const fullName = user ? `${user.firstname} ${user.lastname}` : 'full name';
+  const fullName = `${user.firstName} ${user.lastName}`;
+
+  const logOutHandler = () => {
+    dispatch(setLogout());
+  };
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
@@ -113,7 +117,7 @@ const Navbar = () => {
               <MenuItem value={fullName}>
                 <Typography>{fullName}</Typography>
               </MenuItem>
-              <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
+              <MenuItem onClick={logOutHandler}>Log Out</MenuItem>
             </Select>
           </FormControl>
         </FlexBetween>
@@ -191,9 +195,7 @@ const Navbar = () => {
                 <MenuItem value={fullName}>
                   <Typography>{fullName}</Typography>
                 </MenuItem>
-                <MenuItem onClick={() => dispatch(setLogout())}>
-                  Log Out
-                </MenuItem>
+                <MenuItem onClick={logOutHandler}>Log Out</MenuItem>
               </Select>
             </FormControl>
           </FlexBetween>
