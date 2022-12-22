@@ -44,6 +44,10 @@ export const getUserPosts = asyncHandler(async (req, res) => {
     const { userId } = req.params;
     const posts = await Post.find({ userId });
 
+    if (!posts) {
+      return res.status(200).json('No Posts from this User');
+    }
+
     res.status(200).json(posts);
   } catch (err) {
     res.status(404).json({ success: false, error: err.message });

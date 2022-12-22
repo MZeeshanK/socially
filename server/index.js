@@ -15,6 +15,10 @@ import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
 import { createPost } from './controllers/posts.js';
 import { verifyToken } from './middleware/auth.js';
+import Post from './models/Post.js';
+import User from './models/User.js';
+import mongoose from 'mongoose';
+import { users, posts } from './data/index.js';
 
 // Configurations
 const __filename = fileURLToPath(import.meta.url);
@@ -36,7 +40,7 @@ const port = process.env.PORT || 5000;
 // File Storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/assests');
+    cb(null, 'public/assets');
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -45,14 +49,24 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Routes with files
-app.post('/auth/register', upload.single('picture'), register);
-app.post('/posts', verifyToken, upload.single('picture'), createPost);
+app.post('/api/auth/register', upload.single('picture'), register);
+app.post('/api/posts', verifyToken, upload.single('picture'), createPost);
 
 // Normal Routes
-app.use('/auth', authRoutes);
-app.use('/users', userRoutes);
-app.use('/posts', postRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 connectDB();
 
 app.listen(port, () => console.log(`Server running on port ${port}`.bgGreen));
+
+const importData = async () => {
+  await Post.deleteMany();
+  await User.deleteMany();
+  await Post.insertMany(posts);
+  await User.insertMany(users);
+  console.log('data Imported');
+};
+
+// importData();

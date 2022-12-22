@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setLogin } from '../state/state';
 import Dropzone from 'react-dropzone';
-import FlexBetween from './FlexBetween';
+import FlexBetween from './styledComponents/FlexBetween';
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required('required'),
@@ -65,15 +65,11 @@ const Form = () => {
     }
     formData.append('picturePath', values.picture.name);
 
-    const savedUserResponse = await axios.post(
-      'http://localhost:5000/auth/register',
-      formData,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const savedUserResponse = await axios.post('api/auth/register', formData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
     const savedUser = await savedUserResponse.data;
 
@@ -86,7 +82,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await axios.post(
-      'http://localhost:5000/auth/login',
+      `api/auth/login`,
       JSON.stringify(values),
       {
         headers: {

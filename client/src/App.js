@@ -25,7 +25,11 @@ const App = () => {
           <CssBaseline />
 
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route
+              path="/"
+              // element={!isAuth ? <LoginPage /> : <Navigate to="/home" />}
+              element={<LoginPage />}
+            />
 
             <Route
               path="/home"
