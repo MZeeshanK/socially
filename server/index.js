@@ -17,7 +17,6 @@ import { createPost } from './controllers/posts.js';
 import { verifyToken } from './middleware/auth.js';
 import Post from './models/Post.js';
 import User from './models/User.js';
-import mongoose from 'mongoose';
 import { users, posts } from './data/index.js';
 
 // Configurations
@@ -31,9 +30,10 @@ app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('dev'));
 app.use(cors());
-app.use(bodyParser.json({ limit: '30mb', extended: true }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+app.use(bodyParser.json());
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+
+connectDB();
 
 const port = process.env.PORT || 5000;
 
@@ -56,8 +56,6 @@ app.post('/api/posts', verifyToken, upload.single('picture'), createPost);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
-
-connectDB();
 
 app.listen(port, () => console.log(`Server running on port ${port}`.bgGreen));
 

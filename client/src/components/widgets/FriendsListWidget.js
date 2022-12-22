@@ -12,7 +12,7 @@ const FriendsListWidget = ({ userId }) => {
   const token = useSelector((state) => state.token);
 
   const getFriends = async () => {
-    const { data } = await axios.get(`api/users/${userId}/friends`, {
+    const { data } = await axios.get(`/api/users/${userId}/friends`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
