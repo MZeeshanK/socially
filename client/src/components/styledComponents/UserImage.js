@@ -1,4 +1,5 @@
 import { Box } from '@mui/system';
+Import {URL} from '../constants.js'
 
 const UserImage = ({ image, size = '60px' }) => {
   return (
@@ -8,7 +9,7 @@ const UserImage = ({ image, size = '60px' }) => {
         width={size}
         height={size}
         alt="user"
-        src={`assets/${image}`}
+        src={`${URL}/assets/${image}`}
       />
     </Box>
   );
