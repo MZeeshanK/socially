@@ -15,9 +15,9 @@ import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
 import { createPost } from './controllers/posts.js';
 import { verifyToken } from './middleware/auth.js';
-import Post from './models/Post.js';
-import User from './models/User.js';
-import { users, posts } from './data/index.js';
+//import Post from './models/Post.js';
+//import User from './models/User.js';
+//import { users, posts } from './data/index.js';
 
 // Configurations
 const __filename = fileURLToPath(import.meta.url);
@@ -59,12 +59,12 @@ app.use('/api/posts', postRoutes);
 
 app.listen(port, () => console.log(`Server running on port ${port}`.bgGreen));
 
-const importData = async () => {
-  await Post.deleteMany();
-  await User.deleteMany();
-  await Post.insertMany(posts);
-  await User.insertMany(users);
-  console.log('data Imported');
-};
+//const importData = async () => {
+  //await Post.deleteMany();
+  //await User.deleteMany();
+  //await Post.insertMany(posts);
+  //await User.insertMany(users);
+  //console.log('data Imported');
+//};
 
 // importData();
