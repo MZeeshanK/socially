@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-Import {URL} from '../constants.js'
+Import {URL} from '../constants'
 
 const UserImage = ({ image, size = '60px' }) => {
   return (
