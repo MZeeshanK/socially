@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setFriends } from '../../state/state';
+import { URL } from '../constants';
 
 const FriendsListWidget = ({ userId }) => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const FriendsListWidget = ({ userId }) => {
   const token = useSelector((state) => state.token);
 
   const getFriends = async () => {
-    const { data } = await axios.get(`/api/users/${userId}/friends`, {
+    const { data } = await axios.get(`${URL}/api/users/${userId}/friends`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

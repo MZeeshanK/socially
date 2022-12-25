@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPosts } from '../../state/state';
 import PostWidget from './PostWidget';
+import { URL } from '../constants';
 
 const PostsWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -10,14 +11,14 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   const token = useSelector((state) => state.token);
 
   const getPosts = async () => {
-    const { data } = await axios.get('api/posts', {
+    const { data } = await axios.get(`${URL}/api/posts`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     dispatch(setPosts({ posts: data }));
   };
 
   const getUserPosts = async () => {
-    const { data } = await axios.get(`/api/posts/${userId}`, {
+    const { data } = await axios.get(`${URL}/api/posts/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     dispatch(setPosts({ posts: data }));

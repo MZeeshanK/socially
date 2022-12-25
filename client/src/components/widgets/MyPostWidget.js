@@ -25,6 +25,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPosts } from '../../state/state';
 import axios from 'axios';
+import { URL } from '../constants';
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const MyPostWidget = ({ picturePath }) => {
       formData.append('picture', image);
       formData.append('picturePath', image.name);
     }
-    const { data } = await axios.post('/api/posts', formData, {
+    const { data } = await axios.post(`${URL}/api/posts`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',

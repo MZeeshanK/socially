@@ -1,4 +1,5 @@
 import { Typography, useTheme } from '@mui/material';
+import { URL } from '../constants';
 import FlexBetween from '../styledComponents/FlexBetween';
 import WidgetWrapper from '../styledComponents/WidgetWrapper';
 
@@ -18,7 +19,7 @@ const AdvertWidget = () => {
         <Typography color={medium}>Create Ad</Typography>
       </FlexBetween>
       <img
-        src={`http://localhost:5000/assets/info4.jpeg`}
+        src={`${URL}/assets/info4.jpeg`}
         alt="advert"
         width="100%"
         height="auto"

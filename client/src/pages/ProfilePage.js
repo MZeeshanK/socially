@@ -8,6 +8,7 @@ import FriendListWidget from '../components/widgets/FriendsListWidget';
 import MyPostWidget from '../components/widgets/MyPostWidget';
 import PostsWidget from '../components/widgets/PostsWidget';
 import UserWidget from '../components/widgets/UserWidget';
+import { URL } from '../components/constants';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -16,7 +17,7 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery('(min-width:1000px)');
 
   const getUser = async () => {
-    const { data } = await axios.get(`/api/users/${userId}`, {
+    const { data } = await axios.get(`${URL}/api/users/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

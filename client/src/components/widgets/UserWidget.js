@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Twitter from '../../assets/twitter.png';
 import LinkedIn from '../../assets/linkedin.png';
+import { URL } from '../constants';
 
 const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
@@ -26,7 +27,7 @@ const UserWidget = ({ userId, picturePath }) => {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    const { data } = await axios.get(`/api/users/${userId}`, {
+    const { data } = await axios.get(`${URL}/api/users/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setUser(data);

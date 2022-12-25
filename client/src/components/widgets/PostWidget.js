@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setPost } from '../../state/state';
+import { URL } from '../constants';
 
 const PostWidget = ({
   postId,
@@ -37,7 +38,7 @@ const PostWidget = ({
 
   const patchLike = async () => {
     const { data } = await axios.patch(
-      `/api/posts/${postId}/like`,
+      `${URL}/api/posts/${postId}/like`,
       JSON.stringify({ userId: loggedInUserId }),
       {
         headers: {
@@ -66,7 +67,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }}
-          src={`assets/${picturePath}`}
+          src={`${URL}/assets/${picturePath}`}
         />
       )}
       <FlexBetween mt="0.25rem">
